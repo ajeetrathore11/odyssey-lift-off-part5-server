@@ -14,12 +14,16 @@ async function startApolloServer(typeDefs, resolvers) {
     },
   });
 
-  const { url, port } = await server.listen({port: process.env.PORT || 4000});
+  try {
+    const { url, port } = await server.listen({port: process.env.PORT || 4000});
   console.log(`
       🚀  Server is running
       🔉  Listening on port ${port}
       📭  Query at ${url}
     `);
+  } catch (error) {
+    console.log('server is running to faild', error);
+  }
 }
 
 startApolloServer(typeDefs, resolvers);
